@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisualizeQtVTK", "VisualizeQtVTK\VisualizeQtVTK.vcxproj", "{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Debug|x64.ActiveCfg = Debug|x64
+		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Debug|x64.Build.0 = Debug|x64
+		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Release|x64.ActiveCfg = Release|x64
+		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDE9286F-FFB6-4E63-9051-CB37D20D7388}
+	EndGlobalSection
+EndGlobal

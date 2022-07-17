@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowClass</class>
+ <widget class="QMainWindow" name="MainWindowClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>599</width>
+    <height>413</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Visualize 3D Model by VTK</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>599</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="fileMenu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="loadSTL"/>
+    <addaction name="loadCSV"/>
+    <addaction name="dropAllData"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>显示</string>
+    </property>
+    <addaction name="nextFeature"/>
+    <addaction name="prevFeature"/>
+   </widget>
+   <addaction name="fileMenu"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="loadSTL">
+   <property name="text">
+    <string>加载.stl文件</string>
+   </property>
+  </action>
+  <action name="dropAllData">
+   <property name="text">
+    <string>卸载数据</string>
+   </property>
+  </action>
+  <action name="loadCSV">
+   <property name="text">
+    <string>加载.csv数据</string>
+   </property>
+  </action>
+  <action name="dropCSV">
+   <property name="text">
+    <string>卸载.csv数据</string>
+   </property>
+  </action>
+  <action name="nextFeature">
+   <property name="text">
+    <string>上一个</string>
+   </property>
+  </action>
+  <action name="prevFeature">
+   <property name="text">
+    <string>下一个</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="mainwindow.qrc"/>
+ </resources>
+ <connections/>
+</ui>
