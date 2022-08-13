@@ -48,17 +48,28 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(QtMsBuild)\Qt.props" />
-    <Import Project="..\..\VTK.props" />
+    <Import Project="..\..\..\Library\VTK_d.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="$(QtMsBuild)\Qt.props" />
+    <Import Project="..\..\..\Library\VTK.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\;$(VTK)\bin\Interaction\Widgets;$(VTK)\Interaction\Widgets;$(VTK)\bin\Interaction\Image;$(VTK)\Interaction\Image;$(VTK)\bin\Interaction\Style;$(VTK)\Interaction\Style;$(VTK)\bin\IO\AMR;$(VTK)\bin\IO\Asynchronous;$(VTK)\bin\IO\CityGML;$(VTK)\bin\IO\Core;$(VTK)\bin\IO\EnSight;$(VTK)\bin\IO\Exodus;$(VTK)\bin\IO\Export;$(VTK)\bin\IO\ExportOpenGL2;$(VTK)\bin\IO\ExportPDF;$(VTK)\bin\IO\Geometry;$(VTK)\bin\IO\Image;$(VTK)\bin\IO\Import;$(VTK)\bin\IO\Infovis;$(VTK)\bin\IO\Legacy;$(VTK)\bin\IO\LSDyna;$(VTK)\bin\IO\MINC;$(VTK)\bin\IO\Movie;$(VTK)\bin\IO\NetCDF;$(VTK)\bin\IO\Parallel;$(VTK)\bin\IO\ParallelXML;$(VTK)\bin\IO\PLY;$(VTK)\bin\IO\SegY;$(VTK)\bin\IO\SQL;$(VTK)\bin\IO\TecplotTable;$(VTK)\bin\IO\VeraOut;$(VTK)\bin\IO\Video;$(VTK)\bin\IO\XML;$(VTK)\bin\IO\XMLParser;$(VTK)\bin\Utilities\DICOMParser;$(VTK)\bin\Utilities\KWIML;$(VTK)\bin\Utilities\KWSys;$(VTK)\bin\Utilities\MetaIO;$(VTK)\Utilities\Benchmarks;$(VTK)\Utilities\DICOMParser;$(VTK)\Utilities\Doxygen;$(VTK)\Utilities\DynamicAnalysis;$(VTK)\Utilities\EncodeString;$(VTK)\Utilities\KWIML;$(VTK)\Utilities\KWSys;$(VTK)\Utilities\Maintenance;$(VTK)\Utilities\MetaIO;$(VTK)\Utilities\octree;$(VTK)\Utilities\OutputWindowProcess;$(VTK)\Utilities\Scripts;$(VTK)\Utilities\Upgrading;$(VTK)\Utilities\vtkTclTest2Py;$(VTK)\IO\ADIOS;$(VTK)\IO\AMR;$(VTK)\IO\Asynchronous;$(VTK)\IO\CityGML;$(VTK)\IO\Core;$(VTK)\IO\EnSight;$(VTK)\IO\Exodus;$(VTK)\IO\Export;$(VTK)\IO\ExportOpenGL2;$(VTK)\IO\ExportPDF;$(VTK)\IO\FFMPEG;$(VTK)\IO\GDAL;$(VTK)\IO\GeoJSON;$(VTK)\IO\Geometry;$(VTK)\IO\Image;$(VTK)\IO\Import;$(VTK)\IO\Infovis;$(VTK)\IO\LAS;$(VTK)\IO\Legacy;$(VTK)\IO\LSDyna;$(VTK)\IO\MINC;$(VTK)\IO\MotionFX;$(VTK)\IO\Movie;$(VTK)\IO\MPIImage;$(VTK)\IO\MPIParallel;$(VTK)\IO\MySQL;$(VTK)\IO\NetCDF;$(VTK)\IO\ODBC;$(VTK)\IO\Parallel;$(VTK)\IO\ParallelExodus;$(VTK)\IO\ParallelLSDyna;$(VTK)\IO\ParallelNetCDF;$(VTK)\IO\ParallelXdmf3;$(VTK)\IO\ParallelXML;$(VTK)\IO\PDAL;$(VTK)\IO\PLY;$(VTK)\IO\PostgreSQL;$(VTK)\IO\SegY;$(VTK)\IO\SQL;$(VTK)\IO\TecplotTable;$(VTK)\IO\TRUCHAS;$(VTK)\IO\VeraOut;$(VTK)\IO\Video;$(VTK)\IO\VPIC;$(VTK)\IO\Xdmf2;$(VTK)\IO\Xdmf3;$(VTK)\IO\XML;$(VTK)\IO\XMLParser;$(VTK)\bin\GUISupport\Qt;$(VTK)\bin\Common\Color;$(VTK)\bin\Common\ComputationalGeometry;$(VTK)\bin\Common\Core;$(VTK)\bin\Common\DataModel;$(VTK)\bin\Common\ExecutionModel;$(VTK)\bin\Common\Math;$(VTK)\bin\Common\Misc;$(VTK)\bin\Common\System;$(VTK)\bin\Common\Transforms;$(VTK)\bin\Rendering\Annotation;$(VTK)\bin\Rendering\Context2D;$(VTK)\bin\Rendering\ContextOpenGL2;$(VTK)\bin\Rendering\Core;$(VTK)\bin\Rendering\FreeType;$(VTK)\bin\Rendering\GL2PSOpenGL2;$(VTK)\bin\Rendering\Image;$(VTK)\bin\Rendering\Label;$(VTK)\bin\Rendering\LOD;$(VTK)\bin\Rendering\OpenGL2;$(VTK)\bin\Rendering\Qt;$(VTK)\bin\Rendering\Volume;$(VTK)\bin\Rendering\VolumeOpenGL2;$(VTK)\GUISupport\MFC;$(VTK)\GUISupport\Qt;$(VTK)\GUISupport\QtOpenGL;$(VTK)\GUISupport\QtSQL;$(VTK)\GUISupport\QtWebkit;$(VTK)\Common\Color;$(VTK)\Common\ComputationalGeometry;$(VTK)\Common\Core;$(VTK)\Common\DataModel;$(VTK)\Common\ExecutionModel;$(VTK)\Common\Math;$(VTK)\Common\Misc;$(VTK)\Common\System;$(VTK)\Common\Transforms;$(VTK)\Rendering\Annotation;$(VTK)\Rendering\Context2D;$(VTK)\Rendering\ContextOpenGL2;$(VTK)\Rendering\Core;$(VTK)\Rendering\External;$(VTK)\Rendering\FreeType;$(VTK)\Rendering\FreeTypeFontConfig;$(VTK)\Rendering\GL2PSOpenGL2;$(VTK)\Rendering\Image;$(VTK)\Rendering\Label;$(VTK)\Rendering\LICOpenGL2;$(VTK)\Rendering\LOD;$(VTK)\Rendering\Matplotlib;$(VTK)\Rendering\OpenGL2;$(VTK)\Rendering\OpenVR;$(VTK)\Rendering\OptiX;$(VTK)\Rendering\OSPRay;$(VTK)\Rendering\Parallel;$(VTK)\Rendering\ParallelLIC;$(VTK)\Rendering\PythonContext2D;$(VTK)\Rendering\Qt;$(VTK)\Rendering\SceneGraph;$(VTK)\Rendering\Tk;$(VTK)\Rendering\Volume;$(VTK)\Rendering\VolumeAMR;$(VTK)\Rendering\VolumeOpenGL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -86,15 +97,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="myvisualizer.cpp" />
-    <QtRcc Include="mainwindow.qrc" />
+    <ClCompile Include="myqvtkwidget.cpp" />
     <QtUic Include="mainwindow.ui" />
     <QtMoc Include="mainwindow.h" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="myvisualizer.h" />
+    <QtMoc Include="myqvtkwidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VisualizeQtVTK.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\th.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

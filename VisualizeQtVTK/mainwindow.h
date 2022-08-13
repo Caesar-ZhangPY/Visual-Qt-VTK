@@ -1,5 +1,4 @@
 #pragma once
-
 #define vtkRenderingCore_AUTOINIT 2(vtkRenderingOpenGL2, vtkInteractionStyle)
 
 #include <QtWidgets/QMainWindow>
@@ -7,7 +6,7 @@
 
 #include "QVTKOpenGLWidget.h"
 
-#include "myvisualizer.h"
+#include "myqvtkwidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -18,12 +17,10 @@ public:
 
     void onLoadSTL();
     void onLoadCSV();
+    void onSaveImage();
 
 private:
     Ui::MainWindowClass ui;
 
-    QVTKOpenGLWidget* qVTKWidget_ = new QVTKOpenGLWidget();
-    MyQtVTKVisualizer* visualizer_ = new MyQtVTKVisualizer();
-
-    int feature_index_ = 3;
+    QString copy_right_ = "Copyright (C) 2022 NWPU-Zhang Puyu. All rights reserved.";
 };

@@ -6,20 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
-    <height>413</height>
+    <width>952</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Visualize 3D Model by VTK</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="MyQVTKWidget" name="myQVTKWidget" native="true"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>599</width>
+     <width>952</width>
      <height>23</height>
     </rect>
    </property>
@@ -29,19 +35,26 @@
     </property>
     <addaction name="loadSTL"/>
     <addaction name="loadCSV"/>
+    <addaction name="separator"/>
     <addaction name="dropAllData"/>
+    <addaction name="separator"/>
+    <addaction name="saveImage"/>
    </widget>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="visualizeMenu">
     <property name="title">
      <string>显示</string>
     </property>
-    <addaction name="nextFeature"/>
-    <addaction name="prevFeature"/>
    </widget>
    <addaction name="fileMenu"/>
-   <addaction name="menu"/>
+   <addaction name="visualizeMenu"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </widget>
   <action name="loadSTL">
    <property name="text">
     <string>加载.stl文件</string>
@@ -72,8 +85,21 @@
     <string>下一个</string>
    </property>
   </action>
+  <action name="saveImage">
+   <property name="text">
+    <string>保存图像</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyQVTKWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">myqvtkwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="mainwindow.qrc"/>
  </resources>

@@ -1,6 +1,17 @@
-﻿#include "myvisualizer.h"
+﻿#include "myqvtkwidget.h"
 
 #include <algorithm>
+
+#include "qobject.h"
+#include "qstring.h"
+#include "qvector.h"
+#include "qmap.h"
+#include "qdebug.h"
+#include "qdir.h"
+#include "qfile.h"
+#include "qtextstream.h"
+#include "qfiledialog.h"
+#include "qevent.h"
 
 #include "vtkAutoInit.h"
 VTK_MODULE_INIT(vtkRenderingFreeType)
@@ -29,8 +40,8 @@ VTK_MODULE_INIT(vtkRenderingFreeType)
 #include "vtkDataSetMapper.h"
 #include "vtkProperty.h"
 
-MyQtVTKVisualizer::MyQtVTKVisualizer(QObject *parent)
-	: QObject(parent)
+MyQVTKWidget::MyQVTKWidget(QWidget* parent)
+	: QVTKOpenGLWidget(parent)
 {     
     // 设置坐标轴
     axes_actor_->SetTotalLength(20, 20, 20);
@@ -55,13 +66,16 @@ MyQtVTKVisualizer::MyQtVTKVisualizer(QObject *parent)
     renderer_->SetBackground(0.1, 0.2, 0.4);
     renderer_->SetBackground2(1, 1, 1);
     renderer_->SetGradientBackground(1);
+
+    this->GetRenderWindow()->AddRenderer(renderer_);
+    this->GetRenderWindow()->Render();
 }
 
-MyQtVTKVisualizer::~MyQtVTKVisualizer()
+MyQVTKWidget::~MyQVTKWidget()
 {
 }
 
-void MyQtVTKVisualizer::LoadSTL(QString stl_file)
+void MyQVTKWidget::LoadSTL(QString stl_file)
 {
     if (stl_file.isEmpty()) return;
     
@@ -80,7 +94,7 @@ void MyQtVTKVisualizer::LoadSTL(QString stl_file)
     RefreshWidgetRender();
 }
 
-void MyQtVTKVisualizer::DropAll()
+void MyQVTKWidget::DropAll()
 {
     renderer_->RemoveActor(stl_actor_);
     renderer_->RemoveActor(points_actor_);
@@ -89,14 +103,25 @@ void MyQtVTKVisualizer::DropAll()
     RefreshWidgetRender();
 }
 
-void MyQtVTKVisualizer::RefreshWidgetRender()
+void MyQVTKWidget::RefreshWidgetRender()
 {
-    if (widget_ != nullptr)
-        widget_->GetRenderWindow()->Render();
+    this->GetRenderWindow()->Render();
 }
 
+void MyQVTKWidget::mouseDoubleClickEvent(QMouseEvent* mouse_event)
+{
+    if (mouse_event->button() == Qt::RightButton)
+        point_size_++;
+    if (mouse_event->button() == Qt::LeftButton)
+        if (point_size_ > 1)
+            point_size_--;
 
-void MyQtVTKVisualizer::ColourData(int feature_index)
+    points_actor_->GetProperty()->SetPointSize(point_size_);
+
+    __super::mouseDoubleClickEvent(mouse_event);
+}
+
+void MyQVTKWidget::ColourData(int feature_index)
 {
     auto min_scalar = std::min_element(data_frame_.begin(), data_frame_.end(), 
         [=](QVector<double> p, QVector<double> q)->bool {return p[feature_index] < q[feature_index]; })
@@ -114,7 +139,7 @@ void MyQtVTKVisualizer::ColourData(int feature_index)
     //拓扑数据
     vtkSmartPointer<vtkPolyVertex> poly_vertex   //单元：多顶点，是O维单元的组合，
         = vtkSmartPointer<vtkPolyVertex>::New();
-    //设置ID个数并分配存储ID的内存,必须设置Id个数，否则可以编译，不能运行 
+    //设置ID个数并分配存储ID的内存，必须设置Id个数，否则可以编译，不能运行 
     poly_vertex->GetPointIds()->SetNumberOfIds(data_frame_.size());
     for (int i = 0; i < data_frame_.size(); i++)
         //第一个参数是几何point的ID号，第2个参数是拓扑中的Id号
@@ -130,7 +155,7 @@ void MyQtVTKVisualizer::ColourData(int feature_index)
     // 颜色表
     vtkSmartPointer<vtkLookupTable> lut     
         = vtkSmartPointer<vtkLookupTable>::New();
-    lut->SetNumberOfTableValues(data_frame_.size());    //颜色个数
+    lut->SetNumberOfTableValues(data_frame_.size());  //颜色个数
     lut->SetNumberOfColors(256);
     lut->SetHueRange(0.7, 0);       //颜色色调
     lut->SetAlphaRange(1.0, 1.0);   //颜色饱和度
@@ -168,7 +193,7 @@ void MyQtVTKVisualizer::ColourData(int feature_index)
 
     points_actor_->SetMapper(points_mapper);
     points_actor_->GetProperty()->SetRepresentationToPoints();
-    points_actor_->GetProperty()->SetPointSize(3);
+    points_actor_->GetProperty()->SetPointSize(point_size_);
 
     renderer_->AddActor(points_actor_);
     renderer_->AddActor2D(scalarbar_actor_);
@@ -176,19 +201,12 @@ void MyQtVTKVisualizer::ColourData(int feature_index)
     RefreshWidgetRender();
 }
 
-void MyQtVTKVisualizer::ColourData(QString feature_name)
+void MyQVTKWidget::ColourData(QString feature_name)
 {
     ColourData(column_name_.value(feature_name));
 }
 
-void MyQtVTKVisualizer::SetWidget(QVTKOpenGLWidget* widget)
-{
-    widget_ = widget;
-    widget->GetRenderWindow()->AddRenderer(renderer_);
-    widget->GetRenderWindow()->Render();
-}
-
-void MyQtVTKVisualizer::LoadData(QString csv_file)
+void MyQVTKWidget::LoadData(QString csv_file)
 {
     QDir dir = QDir::current();
     QFile file(dir.filePath(csv_file));
@@ -207,7 +225,7 @@ void MyQtVTKVisualizer::LoadData(QString csv_file)
     // 读取数据
     for (int j = 1; j < row_list.count(); j++)
     {
-        QStringList cell_list = row_list.at(j).split(",");      //一行中的单元格以，区分
+        QStringList cell_list = row_list.at(j).split(",");      //一行中的单元格以“,”区分
         QVector<double> point;
         for (QString cell : cell_list)
             point.push_back(cell.toDouble());
@@ -218,12 +236,9 @@ void MyQtVTKVisualizer::LoadData(QString csv_file)
     if (data_frame_.last().count() != data_frame_.first().count())
         data_frame_.pop_back();
 
-    file.close();
-}
+    emit featuresLoaded(column_name_.keys());
 
-QMap<QString, int> MyQtVTKVisualizer::column_name()
-{
-    return this->column_name_;
+    file.close();
 }
 
 
