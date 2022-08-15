@@ -115,6 +115,9 @@
   <ItemGroup>
     <Image Include="..\th.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="mainwindow.qrc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

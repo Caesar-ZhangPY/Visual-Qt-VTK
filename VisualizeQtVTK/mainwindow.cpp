@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#pragma execution_character_set("utf-8")
 
 #include "qfiledialog.h"
 #include "qstring.h"
@@ -10,6 +11,7 @@
 #include "qpushbutton.h"
 #include "qslider.h"
 #include "qaction.h"
+#include "qlabel.h"
 
 #include "vtkRenderer.h"
 #include "vtkRenderWindow.h"
@@ -36,7 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui.saveImage, &QAction::triggered, this, &MainWindow::onSaveImage);
 
-    ui.statusBar->showMessage(copy_right_);
+    /*QLabel* copyRights = new QLabel(this);
+    QLabel* thanks = new QLabel(this);
+    copyRights->setText(tr("Copyright (C) 2022 NWPU-张璞玉. All rights reserved. "));
+    thanks->setText(tr(" 基于对刘冬生成果的整理 "));
+    ui.statusBar->addPermanentWidget(copyRights);
+    ui.statusBar->addPermanentWidget(thanks);*/
 }
 
 void MainWindow::onLoadSTL()

@@ -21,6 +21,4 @@ public:
 
 private:
     Ui::MainWindowClass ui;
-
-    QString copy_right_ = "Copyright (C) 2022 NWPU-Zhang Puyu. All rights reserved.";
 };
