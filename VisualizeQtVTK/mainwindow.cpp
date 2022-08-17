@@ -24,13 +24,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui.loadSTL, &QAction::triggered, this, &MainWindow::onLoadSTL);
     connect(ui.loadCSV, &QAction::triggered, this, &MainWindow::onLoadCSV);
     connect(ui.dropAllData, &QAction::triggered, ui.myQVTKWidget, &MyQVTKWidget::DropAll);
+    connect(ui.dropAllData, &QAction::triggered, ui.visualizeMenu, &QMenu::clear);
 
     connect(ui.myQVTKWidget, &MyQVTKWidget::featuresLoaded, [=](QStringList column_name) {
-        for (QString feature : column_name)
+        for (int i = 3; i < column_name.size(); i++)
+        {
+            QAction* action = new QAction(column_name.at(i));
+            ui.visualizeMenu->addAction(action);
+        }
+        /*for (QString feature : column_name)
         {
             QAction* action = new QAction(feature);
             ui.visualizeMenu->addAction(action);
-        }
+        }*/
         });
     connect(ui.visualizeMenu, &QMenu::triggered, [=](QAction* action) {
         ui.myQVTKWidget->ColourData(action->text());
