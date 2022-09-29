@@ -5,8 +5,6 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisualizeQtVTK", "VisualizeQtVTK\VisualizeQtVTK.vcxproj", "{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{4ABCE189-68CB-4222-90ED-DE560D403643}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -17,8 +15,6 @@ Global
 		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Debug|x64.Build.0 = Debug|x64
 		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Release|x64.ActiveCfg = Release|x64
 		{3DB2E7EC-EC4B-49F9-84B4-E56C4B7D9945}.Release|x64.Build.0 = Release|x64
-		{4ABCE189-68CB-4222-90ED-DE560D403643}.Debug|x64.ActiveCfg = Debug
-		{4ABCE189-68CB-4222-90ED-DE560D403643}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
